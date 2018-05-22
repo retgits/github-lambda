@@ -82,7 +82,14 @@ func handler(request events.CloudWatchEvent) error {
 	// Create a new AWS session to invoke a Lambda function
 	config := aws.NewConfig().WithRegion(region)
 	aws := lambda.New(session.New(config))
+
+	// Configure AWS X-Ray
+	xray.Configure(xray.Config{LogLevel: "trace"})
 	xray.AWS(aws.Client)
+
+	// Start subsegment lambda
+	ctx, seg := xray.BeginSegment(context.Background(), "github")
+	ctx, subSeg := xray.BeginSubsegment(ctx, "lambda")
 
 	// For each new issue create a Trello card
 	for _, issue := range issues {
@@ -110,6 +117,11 @@ func handler(request events.CloudWatchEvent) error {
 
 		log.Printf("Created a card for %s\n", issue.GetTitle())
 	}
+
+	// Close the subsegment
+	subSeg.Close(nil)
+	seg.Close(nil)
+
 	return nil
 }
 
