@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: The AWS CloudFormation template for the GitHub Serverless application
+Resources:
+  GitHub:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bin/
+      Handler: github
+      Runtime: go1.x
+      Tracing: Active
+      Environment:
+        Variables:
+          apptoken: xxx
+          interval: xxx
+          arntrello: xxx
+      Tags:
+        commit: xxx
