@@ -12,6 +12,7 @@ deps() {
 	go get -u github.com/aws/aws-sdk-go/service/lambda
 	go get -u github.com/google/go-github/github
 	go get -u golang.org/x/oauth2
+    go get -u github.com/aws/aws-xray-sdk-go/...
 }
 
 # Remove the bin folder
