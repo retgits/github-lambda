@@ -8,7 +8,15 @@ Resources:
       CodeUri: bin/
       Handler: github
       Runtime: go1.x
+      Timeout: 10
+      Policies:
+        - AWSLambdaRole
       Tracing: Active
+      Events:
+        GitHubIssues:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0/15 * * * ? *)
       Environment:
         Variables:
           apptoken: xxx
