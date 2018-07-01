@@ -1,26 +1,27 @@
 # GitHub app for Lambda
 
-This Serverless function is designed to query the Github API for new issues assigned to the current user.
+This serverless function is designed to query the Github API for new issues assigned to the current user.
 
 ## Layout
 ```bash
 .
-├── build.sh                    <-- Make to automate build
+├── build                       <-- Make to automate build
 ├── event.json                  <-- Sample event to test using SAM local
 ├── README.md                   <-- This file
 ├── src                         <-- Source code for a lambda function
-│   ├── main.go                 <-- Lambda function code
-│   └── main_test.go            <-- Unit tests
+│   ├── main.go                 <-- Lambda trigger code
+│   └── function.go             <-- Lambda function code
 └── template.yaml               <-- SAM Template
 ```
 
 ## build.sh
-The `build.sh` file has seven commands to make working with this app easier than it already is
+The `build` file has seven commands to make working with this app easier than it already is
 
 * deps: go get and update all the dependencies
 * clean: removes the ./bin folder
 * test: uses SAM local and the event in `event.json` to test the implementation
 * build: creates the executable
+* getversion: get the latest committed version
 * getparams: updates the SAM template with the values from the AWS Systems Manager Parameter Store
 * delparams: removes the values of the environment variables in the SAM template
 * deploy: deploy the function to AWS Lambda
@@ -38,10 +39,10 @@ Within the AWS Systems Manager Parameter store there are three parameters that a
 
 * /github/apptoken
 * /github/interval
-* /arn/trello
+* /trello/arn
 
 ## TODO
-- [ ] Update the `deps` target in build.sh to make use of dep or simply have a smarter approach than list all dependencies
+- [ ] Replace the trigger code with a proper Flogo trigger
 
 ## License
 The MIT License (MIT)
