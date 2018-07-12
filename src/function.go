@@ -29,7 +29,7 @@ var (
 	interval = os.Getenv("interval")
 
 	// The ARN for the Trello function
-	trelloARN = os.Getenv("P_trello_arn")
+	trelloARN = os.Getenv("trello_arn")
 
 	// The region in which the Trello function runs
 	region = "us-west-2"

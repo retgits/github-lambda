@@ -19,8 +19,8 @@ Resources:
             Schedule: cron(0/15 * * * ? *)
       Environment:
         Variables:
-          apptoken: xxx
-          interval: xxx
-          P_trello_arn: xxx
+          apptoken: {/github/apptoken}
+          interval: {/github/interval}
+          trello_arn: {/trello/arn}
       Tags:
         commit: xxx
