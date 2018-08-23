@@ -14,4 +14,4 @@ test-lambda: clean build
 
 deploy: clean build
 	sam package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket retgits-apps
-	sam deploy --template-file packaged.yaml --stack-name fdio-lambda --capabilities CAPABILITY_IAM
+	sam deploy --template-file packaged.yaml --stack-name github-lambda --capabilities CAPABILITY_IAM
