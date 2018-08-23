@@ -6,21 +6,22 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: bin/
-      Handler: github
+      Handler: github-lambda
       Runtime: go1.x
       Timeout: 10
       Tracing: Active
       Policies:
         - AWSLambdaRole
+        - AmazonSSMReadOnlyAccess
+      Environment:
+        Variables:
+          region: us-west-2
       Events:
         GitHubIssues:
           Type: Schedule
           Properties:
-            Schedule: cron(0/15 * * * ? *)
-      Environment:
-        Variables:
-          apptoken: {/github/apptoken}
-          interval: {/github/interval}
-          trello_arn: {/trello/arn}
+            Schedule: cron(0/15 * * * ? *) # Run every 15 minutes, every day
       Tags:
         commit: xxx
+      Description: Collecting GitHub issues for the current user
+      MemorySize: 128
