@@ -22,6 +22,6 @@ Resources:
           Properties:
             Schedule: cron(0/15 * * * ? *) # Run every 15 minutes, every day
       Tags:
-        commit: xxx
+        version: "0.0.1"
       Description: Collecting GitHub issues for the current user
       MemorySize: 128
